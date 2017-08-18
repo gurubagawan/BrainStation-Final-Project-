@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Gender from './firstq';
+import Gender from './gender';
 import Age from './age'
 import axios from 'axios';
 import Symptoms from './symptoms'
+import { Link } from 'react-router'
 
 class App extends Component {
   constructor() {
@@ -13,17 +14,23 @@ class App extends Component {
       symptomIDs: '',
       gender: '',
       yearOfBirth: '',
-      symptoms: []
+      symptoms: [], 
+      bodyArea: '', 
     }
-    axios.get('http://localhost:8080/symptoms',)
-      .then(res => {
-        this.setState({
-          symptoms: res.data,
-        })
-        console.log('get request was made ')
+    // axios.get('http://localhost:8080/symptoms',)
+    //   .then(res => {
+    //     this.setState({
+    //       symptoms: res.data,
+    //     })
+    //     console.log('get request was made ')
+    //   })
+  }
+  setBodyArea(num) {
+      this.setState ({
+        bodyArea: num
       })
   }
-  submitSymptoms(event) {
+  getSymptoms(event) {
     event.preventDefault(); //stops page reload 
     axios.post('https://localhost:8080/symptoms', {
       text: this.state.symptoms
@@ -46,12 +53,11 @@ class App extends Component {
   }
 
   render() {
-    console.log (typeof(this.state.symptoms))
+    //console.log (typeof(this.state.symptoms))
     return (
       <div className="App">
-        <Gender changeGender={this.changeGender} />
-        <Age setAge={this.setAge} />
-          <Symptoms symptoms={this.state.symptoms} />  
+        This
+        {React.cloneElement(this.props.children, {changeGender: this.props.changeGender})}
       </div>
     );
   }

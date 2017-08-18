@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {Link}  from 'react-router'; 
 
 class Age extends Component {
     render() {
@@ -21,6 +21,7 @@ class Age extends Component {
                     <select> 
                     {ageDropDown}
                     </select> 
+                    <Link to ={'/bodyparts'}> <button> Next </button> </Link> 
                 </form>
             </div>
         );

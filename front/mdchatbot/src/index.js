@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import Gender from './firstq'; 
-import Age from './age'; 
+import Gender from './gender';
+import Age from './age';
+import Bodyparts from './bodyparts'; 
 
-ReactDOM.render( (
-  <Router history={browserHistory}>
-    <Route songs={Gender} path="/" component={App}>
-      <IndexRoute component={Gender} />
-      <Route path="age" component={Age} />
-      <Route path="gender" component={Gender} />
-    </Route>
-  </Router>
+ReactDOM.render((
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+            <IndexRoute component={App} />
+            <Route path="age" component={Age} />
+            <Route path='gender' component={Gender} />
+            <Route path='bodyparts' component= {Bodyparts}/>
+        </Route>
+    </Router>
 ), document.getElementById('root'));
-registerServiceWorker();
+//registerServiceWorker();
