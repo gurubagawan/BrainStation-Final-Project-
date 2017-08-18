@@ -7,8 +7,8 @@ class Gender extends Component {
     return (
       <div className="App">
           First off are you a Man or a Woman? 
-          <button onClick={() => {this.props.changeGender(Man)} }> Man </button>
-          <button> Woman </button>
+          <button onClick={() => {this.props.changeGender('Man')} }> Man </button>
+          <button onClick={() => {this.props.changeGender('Woman')} }> Woman </button>
       </div>
     );
   }
