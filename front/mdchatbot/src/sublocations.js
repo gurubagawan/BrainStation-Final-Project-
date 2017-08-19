@@ -8,14 +8,47 @@ import Symptoms from './symptoms'
 import { Link } from 'react-router'
 
 class Sublocation extends Component {
-    constructor() {
-    super();
-    var subArea =[]
-    axios.post('https://localhost:8080/bodyArea', {
-      text: this.props.bodyarea
+    constructor(props) {
+    super(props)
+    this.state = {
+      subArea: [], 
+    }
+    console.log(this.props.bodyArea)
+    axios.post('http://localhost:8080/bodyarea', {
+      text: this.props.bodyArea
     })
       .then(res => {
-            subArea = res.data
+        console.log('postrequest was made and received')
+        console.log(res.data)
+        this.setState ({
+            subArea : res.data
+      })
+          //console.log(this.state.subArea)
       })
   }
+  render () {
+    console.log(this.state.subArea[0])
+     var subAreaArray = []
+    //  for (let i=0; i < this.state.subArea.length; i++){
+    //    subAreaArray.push(this.state.subArea[i])
+    //  }
+
+     subAreaArray = this.state.subArea.map((specpart, j) => {
+      //  console.log(specpart.Name)
+            return (
+                <option key={j} value={specpart.ID}>{specpart.Name}</option>
+            )
+        })
+          // console.log(subAreaArray)
+    return (
+      <div> 
+        Okay which part specifically? 
+      <select name="subArea" onChange={this.grabValue} id="areaSelect">
+            {subAreaArray}    
+      </select> 
+      </div> 
+    )
+  }
 }
+
+export default Sublocation; 

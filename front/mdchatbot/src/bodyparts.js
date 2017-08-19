@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import $ from 'jquery';
 import { findDomNode } from 'react-dom';
 // import {mapster} from './libraries/jquery.imagemapster'; 
-import ImageMapper from 'react-image-mapper';
+//import ImageMapper from 'react-image-mapper';
 
 class Bodyparts extends Component {
     constructor() {
@@ -32,7 +32,7 @@ class Bodyparts extends Component {
                     <option value="16">Abdomen, Pelvis & Buttocks</option>
                     <option value="10">Legs</option>
                 </select>
-                 <Link to ={'/age'}>  
+                 <Link to ={'/sublocation'}>  
                 <button onClick={() => {this.props.setBodyArea(this.state.bodyPartValue)}}> Next </button>
                   </Link>  
             </div>
