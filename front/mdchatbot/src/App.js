@@ -13,10 +13,12 @@ class App extends Component {
     this.state = {
       symptomIDs: '',
       gender: '',
-      yearOfBirth: '',
+      yearOfBirth: 0,
       symptoms: [], 
-      bodyArea: '', 
+      bodyArea: 0, 
     }
+    this.setBodyArea = this.setBodyArea.bind(this)
+    this.setAge = this.setAge.bind(this)
     // axios.get('http://localhost:8080/symptoms',)
     //   .then(res => {
     //     this.setState({
@@ -28,7 +30,7 @@ class App extends Component {
   setBodyArea(num) {
       this.setState ({
         bodyArea: num
-      })
+      }); 
   }
   getSymptoms(event) {
     event.preventDefault(); //stops page reload 
@@ -57,7 +59,7 @@ class App extends Component {
     return (
       <div className="App">
         This
-        {React.cloneElement(this.props.children, {changeGender: this.props.changeGender})}
+        {React.cloneElement(this.props.children, {yearOfBirth: this.state.yearOfBirth ,setAge: this.setAge, bodyArea: this.state.bodyArea, changeGender: this.props.changeGender, setBodyArea: this.setBodyArea, bodyArea: this.state.bodyArea})}
       </div>
     );
   }

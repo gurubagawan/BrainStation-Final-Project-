@@ -10,22 +10,31 @@ import ImageMapper from 'react-image-mapper';
 class Bodyparts extends Component {
     constructor() {
         super();
-        // $('#body').mapster({
-        //     fillColor: 'ff0000',
-        //     fillOpacity: 0.3
-        // });
+        this.state = {
+            bodyPartValue: 0
+        }
+        this.grabValue = this.grabValue.bind(this)
+    }
+    grabValue(event) {
+        this.setState ({
+            bodyPartValue: event.target.value
+        })
     }
     render() {
+        //var bodyPartValue = 0
+        console.log(this.props.yearOfBirth)
         return (
             <div className="gender">
-                <select name="bodyArea" id="areaSelect">
+                <select name="bodyArea" onChange={this.grabValue} id="areaSelect">
                     <option value='6'>Head, Throat and Neck</option>
                     <option value="15">Chest and Back</option>
                     <option value="7">Arms & Shoulder </option>
                     <option value="16">Abdomen, Pelvis & Buttocks</option>
                     <option value="10">Legs</option>
                 </select>
-                <Link to ={'/symptoms'}> <button> Next </button> </Link> 
+                 <Link to ={'/age'}>  
+                <button onClick={() => {this.props.setBodyArea(this.state.bodyPartValue)}}> Next </button>
+                  </Link>  
             </div>
         );
     }
