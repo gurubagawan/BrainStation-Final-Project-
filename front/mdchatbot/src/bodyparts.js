@@ -24,15 +24,17 @@ class Bodyparts extends Component {
         //var bodyPartValue = 0
         console.log(this.props.yearOfBirth)
         return (
-            <div className="gender">
+            <div className="body">
+                Where are you experiencing pain or discomfort? 
                 <select name="bodyArea" onChange={this.grabValue} id="areaSelect">
+                    <option> --- </option>
                     <option value='6'>Head, Throat and Neck</option>
                     <option value="15">Chest and Back</option>
                     <option value="7">Arms & Shoulder </option>
                     <option value="16">Abdomen, Pelvis & Buttocks</option>
                     <option value="10">Legs</option>
                 </select>
-                 <Link to ={'/sublocation'}>  
+                 <Link to ={`/sublocation/${this.state.bodyPartValue}`}>  
                 <button onClick={() => {this.props.setBodyArea(this.state.bodyPartValue)}}> Next </button>
                   </Link>  
             </div>

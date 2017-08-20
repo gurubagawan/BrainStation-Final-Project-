@@ -8,6 +8,14 @@ import Gender from './gender';
 import Age from './age';
 import Bodyparts from './bodyparts'; 
 import Sublocation from './sublocations'; 
+import PartSymptoms from './partsymptoms'; 
+import {Button, Icon} from 'react-materialize'
+export default () => (
+	<Button waves='light'>
+		<Icon>thumb_up</Icon>
+	</Button>
+)
+
 
 ReactDOM.render((
     <Router history={browserHistory}>
@@ -16,7 +24,8 @@ ReactDOM.render((
             <Route path="age" component={Age} />
             <Route path='gender' component={Gender} />
             <Route path='bodyparts' component= {Bodyparts}/>
-            <Route path ='sublocation' component={Sublocation}/>
+            <Route path='sublocation/:id' component={Sublocation}/>
+            <Route path='bodypartsymptoms/:id' component = {PartSymptoms} />
         </Route>
     </Router>
 ), document.getElementById('root'));

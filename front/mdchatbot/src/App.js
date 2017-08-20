@@ -14,11 +14,15 @@ class App extends Component {
       symptomIDs: '',
       gender: '',
       yearOfBirth: 0,
-      symptoms: [], 
-      bodyArea: 0, 
+      symptoms: [],
+      bodyArea: 0,
+      specBodyPart: 0,
     }
     this.setBodyArea = this.setBodyArea.bind(this)
     this.setAge = this.setAge.bind(this)
+    this.setSpecBodyPart = this.setSpecBodyPart.bind(this)
+    this.changeGender = this.changeGender.bind(this)
+    this.addToSymptoms = this.addToSymptoms.bind(this)
     // axios.get('http://localhost:8080/symptoms',)
     //   .then(res => {
     //     this.setState({
@@ -28,9 +32,15 @@ class App extends Component {
     //   })
   }
   setBodyArea(num) {
-      this.setState ({
-        bodyArea: num
-      }); 
+    this.setState({
+      bodyArea: num
+    });
+  }
+
+  setSpecBodyPart(num) {
+    this.setState({
+      specBodyPart: num,
+    })
   }
   getSymptoms(event) {
     event.preventDefault(); //stops page reload 
@@ -53,13 +63,30 @@ class App extends Component {
       yearOfBirth: number
     })
   }
+  addToSymptoms(array) {
+    for (let i = 0; i < array.length; i++)
+      if (array[i].present ) {
+        this.setState({
+          symptomsIDs:
+          `${this.state.symptomsIDs},${array[i].id}`
+        })
+      }
+  }
 
   render() {
-    //console.log (typeof(this.state.symptoms))
+    console.log(this.state.specBodyPart)
+    console.log(this.state.symptomIDs)
     return (
       <div className="App">
         This
-        {React.cloneElement(this.props.children, {yearOfBirth: this.state.yearOfBirth ,setAge: this.setAge, bodyArea: this.state.bodyArea, changeGender: this.props.changeGender, setBodyArea: this.setBodyArea, bodyArea: this.state.bodyArea})}
+        {React.cloneElement(this.props.children, {
+          setSpecBodyPart: this.setSpecBodyPart, specBodyPart: this.state.specBodyPart,
+          yearOfBirth: this.state.yearOfBirth, setAge: this.setAge,
+          bodyArea: this.state.bodyArea,
+          changeGender: this.changeGender, gender: this.state.gender,
+          setBodyArea: this.setBodyArea, bodyArea: this.state.bodyArea,
+          addToSymptoms: this.addToSymptoms, symptomsIDs: this.state.symptomsIDs
+        })}
       </div>
     );
   }

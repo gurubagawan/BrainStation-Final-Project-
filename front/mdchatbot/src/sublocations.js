@@ -8,45 +8,52 @@ import Symptoms from './symptoms'
 import { Link } from 'react-router'
 
 class Sublocation extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props)
     this.state = {
-      subArea: [], 
+      subArea: [],
+      specPart: 0, 
     }
-    console.log(this.props.bodyArea)
-    axios.post('http://localhost:8080/bodyarea', {
-      text: this.props.bodyArea
+    this.grabValue = this.grabValue.bind(this)
+    //console.log(this.props.bodyArea)
+    axios.get(`http://localhost:8080/bodyarea/${this.props.bodyArea}`, {
+      //text: this.props.bodyArea
     })
       .then(res => {
         console.log('postrequest was made and received')
         console.log(res.data)
-        this.setState ({
-            subArea : res.data
-      })
-          //console.log(this.state.subArea)
+        this.setState({
+          subArea: res.data
+        })
+        //console.log(this.state.subArea)
       })
   }
-  render () {
-    console.log(this.state.subArea[0])
-     var subAreaArray = []
-    //  for (let i=0; i < this.state.subArea.length; i++){
-    //    subAreaArray.push(this.state.subArea[i])
-    //  }
+  grabValue(event) {
+    this.setState({
+      specPart: event.target.value
+    })
+  }
+  render() {
+    console.log(this.props.bodyArea)
+    console.log(this.state.specPart)
+    var subAreaArray = []
 
-     subAreaArray = this.state.subArea.map((specpart, j) => {
+    subAreaArray = this.state.subArea.map((specpart, j) => {
       //  console.log(specpart.Name)
-            return (
-                <option key={j} value={specpart.ID}>{specpart.Name}</option>
-            )
-        })
-          // console.log(subAreaArray)
+      return (
+        <option key={j} value={specpart.ID}>{specpart.Name}</option>
+      )
+    })
+    // console.log(subAreaArray)
     return (
-      <div> 
-        Okay which part specifically? 
+      <div>
+        Okay which part specifically?
       <select name="subArea" onChange={this.grabValue} id="areaSelect">
-            {subAreaArray}    
-      </select> 
-      </div> 
+          <option> --- </option>
+          {subAreaArray}
+        </select>
+        <Link to ={`/bodypartsymptoms/${this.state.specPart}`} ><button onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </button> </Link> 
+      </div>
     )
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
+import {Button, Icon} from 'react-materialize'
 
 class Age extends Component {
     constructor() {
@@ -26,12 +27,13 @@ class Age extends Component {
                 <option key={j} value={curAge}>{curAge}</option>
             )
         })
-        console.log(this.props.bodyArea)
+        console.log(this.props.gender)
         return (
             <div className="App">
                 <form>
                     What year were you born?
                     <select onChange={this.grabValue}>
+                        <option> --- </option>
                         {ageDropDown}
                     </select>
                     <Link to={'/bodyparts'}> <button onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </button> </Link>
