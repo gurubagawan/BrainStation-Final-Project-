@@ -27,6 +27,7 @@ class Age extends Component {
                 <option key={j} value={curAge}>{curAge}</option>
             )
         })
+        console.log(this.props.sex)
         console.log(this.props.gender)
         return (
             <div className="App">

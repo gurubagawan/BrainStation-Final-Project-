@@ -8,8 +8,8 @@ class Gender extends Component {
     return (
       <div className="gender">
           Please select your Gender
-          <button onClick={() => {this.props.changeGender('man')} }> Man </button>
-          <button onClick={() => {this.props.changeGender('woman')} }> Woman </button>
+          <button onClick={() => {this.props.changeGender('man', 'male')} }> Man </button>
+          <button onClick={() => {this.props.changeGender('woman', 'female')} }> Woman </button>
           <Link to ={'/age'}> <button> Next </button> </Link> 
       </div>
     );

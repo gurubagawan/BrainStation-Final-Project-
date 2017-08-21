@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       symptomIDs: '',
       gender: '',
+      sex: '', 
       yearOfBirth: 0,
       symptoms: [],
       bodyArea: 0,
@@ -53,9 +54,9 @@ class App extends Component {
         })
       })
   }
-  changeGender(inputedGender) {
+  changeGender(inputedGender, inputedSex) {
     this.setState({
-      gender: inputedGender,
+      gender: inputedGender, sex: inputedSex, 
     })
   }
   setAge(number) {
@@ -64,28 +65,36 @@ class App extends Component {
     })
   }
   addToSymptoms(array) {
-    for (let i = 0; i < array.length; i++)
-      if (array[i].present ) {
-        this.setState({
-          symptomsIDs:
-          `${this.state.symptomsIDs},${array[i].id}`
-        })
-      }
+    let thisString= ''
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].present) {
+        thisString += (array[i].ID + ',' )
+        // this.setState({
+        //   symptomIDs: this.state.symptomIDs +','+ array[i].ID
+        // })
+        // console.log('true')
+        // console.log(array[i].ID)
+      } 
+    }
+      console.log(thisString)
+      this.setState ({
+        symptomIDs: thisString 
+      })
   }
 
   render() {
-    console.log(this.state.specBodyPart)
-    console.log(this.state.symptomIDs)
+    // console.log(this.state.specBodyPart)
+     console.log(this.state.symptomIDs)
+     console.log(this.props.children)
     return (
       <div className="App">
         This
         {React.cloneElement(this.props.children, {
           setSpecBodyPart: this.setSpecBodyPart, specBodyPart: this.state.specBodyPart,
           yearOfBirth: this.state.yearOfBirth, setAge: this.setAge,
-          bodyArea: this.state.bodyArea,
-          changeGender: this.changeGender, gender: this.state.gender,
+          changeGender: this.changeGender, gender: this.state.gender, sex: this.state.sex, 
           setBodyArea: this.setBodyArea, bodyArea: this.state.bodyArea,
-          addToSymptoms: this.addToSymptoms, symptomsIDs: this.state.symptomsIDs
+          addToSymptoms: this.addToSymptoms, symptomIDs: this.state.symptomIDs, 
         })}
       </div>
     );
