@@ -4,8 +4,12 @@ import './App.css';
 import Gender from './gender';
 import Age from './age'
 import axios from 'axios';
-import Symptoms from './symptoms'
-import { Link } from 'react-router'
+import Symptoms from './symptoms'; 
+import { Link } from 'react-router'; 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class Sublocation extends Component {
   constructor(props) {
@@ -28,9 +32,9 @@ class Sublocation extends Component {
         //console.log(this.state.subArea)
       })
   }
-  grabValue(event) {
+ grabValue = (event, index, value) => {
     this.setState({
-      specPart: event.target.value
+      specPart: value
     })
   }
   render() {
@@ -41,18 +45,17 @@ class Sublocation extends Component {
     subAreaArray = this.state.subArea.map((specpart, j) => {
       //  console.log(specpart.Name)
       return (
-        <option key={j} value={specpart.ID}>{specpart.Name}</option>
+        <MenuItem key={j} primaryText={specpart.Name} value={specpart.ID}/>
       )
     })
     // console.log(subAreaArray)
     return (
       <div>
-        Okay which part specifically?
-      <select name="subArea" onChange={this.grabValue} id="areaSelect">
-          <option> --- </option>
+        Okay which part specifically? <br/> 
+      <SelectField name="subArea" onChange={this.grabValue} id="areaSelect" value={this.state.specPart}>
           {subAreaArray}
-        </select>
-        <Link to ={`/bodypartsymptoms/${this.state.specPart}`} ><button onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </button> </Link> 
+        </SelectField>
+        <Link to ={`/bodypartsymptoms/${this.state.specPart}`} ><RaisedButton primary={true} onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </RaisedButton> </Link> 
       </div>
     )
   }

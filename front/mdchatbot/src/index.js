@@ -11,6 +11,7 @@ import Sublocation from './sublocations';
 import PartSymptoms from './partsymptoms'; 
 import Diagnosis from './diagnosis'
 import {Button, Icon} from 'react-materialize'
+import Home from './home'
 export default () => (
 	<Button waves='light'>
 		<Icon>thumb_up</Icon>
@@ -21,7 +22,7 @@ export default () => (
 ReactDOM.render((
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute component={Diagnosis} />
+            <IndexRoute component={Home} />
             <Route path="age" component={Age} />
             <Route path='gender' component={Gender} />
             <Route path='bodyparts' component= {Bodyparts}/>

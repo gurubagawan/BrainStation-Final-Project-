@@ -7,6 +7,9 @@ import axios from 'axios';
 class Diagnosis extends Component {
   constructor (props) {
     super (props) 
+    this.state = {
+      diag: []
+    }
     console.log(this.props.symptomIDs)
     console.log(this.props.sex)
     console.log(this.props.yearOfBirth)
@@ -17,7 +20,9 @@ class Diagnosis extends Component {
       .then(res => {
         console.log('postrequest was made and received')
         console.log(res.data)
-        var diag = res.data
+        this.setState ({
+          diag: res.data
+        })
         //console.log(this.state.subArea)
       })
       .catch(function (error) {
@@ -25,9 +30,17 @@ class Diagnosis extends Component {
         })
   }
   render() {
+    let theDiagnosis = []
+    for (let i=0; i<this.state.diag.length; i++) {
+      theDiagnosis.push (
+        <div> <h2>  {this.state.diag[i].Issue.Name}</h2>  
+        <p> Chance you have it {this.state.diag[i].Issue.Accuracy} </p> 
+        </div> 
+      )
+    } 
     return (
       <div className="gender">
-         Some shit
+         {theDiagnosis}
       </div>
     );
   }

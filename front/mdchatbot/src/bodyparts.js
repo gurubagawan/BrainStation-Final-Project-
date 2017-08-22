@@ -6,6 +6,11 @@ import $ from 'jquery';
 import { findDomNode } from 'react-dom';
 // import {mapster} from './libraries/jquery.imagemapster'; 
 //import ImageMapper from 'react-image-mapper';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 
 class Bodyparts extends Component {
     constructor() {
@@ -15,28 +20,27 @@ class Bodyparts extends Component {
         }
         this.grabValue = this.grabValue.bind(this)
     }
-    grabValue(event) {
-        this.setState ({
-            bodyPartValue: event.target.value
+    grabValue = (event, index, value) => {
+        this.setState({
+            bodyPartValue: value
         })
     }
     render() {
         //var bodyPartValue = 0
-        console.log(this.props.yearOfBirth)
+        console.log(this.state.bodyPartValue)
         return (
             <div className="body">
-                Where are you experiencing pain or discomfort? 
-                <select name="bodyArea" onChange={this.grabValue} id="areaSelect">
-                    <option> --- </option>
-                    <option value='6'>Head, Throat and Neck</option>
-                    <option value="15">Chest and Back</option>
-                    <option value="7">Arms & Shoulder </option>
-                    <option value="16">Abdomen, Pelvis & Buttocks</option>
-                    <option value="10">Legs</option>
-                </select>
-                 <Link to ={`/sublocation/${this.state.bodyPartValue}`}>  
-                <button onClick={() => {this.props.setBodyArea(this.state.bodyPartValue)}}> Next </button>
-                  </Link>  
+                Where are you experiencing pain or discomfort? <br />
+                <SelectField autoWidth={true} name="bodyArea" value={this.state.bodyPartValue} onChange={this.grabValue} id="areaSelect">
+                    <MenuItem value='6' primaryText='Head, Throat and Neck' />
+                    <MenuItem value="15" primaryText='Chest and Back' />
+                    <MenuItem value="7" primaryText='Arms & Shoulder' />
+                    <MenuItem value="16" primaryText='Abdomen, Pelvis & Buttocks' />
+                    <MenuItem value="10" primaryText='Legs' />
+                </SelectField>
+                <Link to={`/sublocation/${this.state.bodyPartValue}`}>
+                    <RaisedButton primary={true} onClick={() => { this.props.setBodyArea(this.state.bodyPartValue) }}> Next </RaisedButton>
+                </Link>
             </div>
         );
     }

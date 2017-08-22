@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
 import {Button, Icon} from 'react-materialize'
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class Age extends Component {
     constructor() {
@@ -12,9 +17,9 @@ class Age extends Component {
         }
         this.grabValue = this.grabValue.bind(this)
     }
-    grabValue(event) {
+    grabValue = (event, index, value) => {
         this.setState({
-            birthYear: event.target.value
+           birthYear: value
         })
     }
     render() {
@@ -24,20 +29,17 @@ class Age extends Component {
         }
         var ageDropDown = ageArray.map((curAge, j) => {
             return (
-                <option key={j} value={curAge}>{curAge}</option>
+                <MenuItem key={j} value={curAge} primaryText={curAge}/> 
             )
         })
-        console.log(this.props.sex)
-        console.log(this.props.gender)
         return (
             <div className="App">
                 <form>
-                    What year were you born?
-                    <select onChange={this.grabValue}>
-                        <option> --- </option>
+                    What year were you born? <br/> 
+                    <SelectField autoWidth={true} floatingLabelText='Birth year' value={this.state.birthYear} onChange={this.grabValue}>
                         {ageDropDown}
-                    </select>
-                    <Link to={'/bodyparts'}> <button onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </button> </Link>
+                    </SelectField>
+                    <Link to={'/bodyparts'}> <RaisedButton primary={true} onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </RaisedButton> </Link>
                 </form>
             </div>
         );

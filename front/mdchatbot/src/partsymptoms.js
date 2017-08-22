@@ -5,8 +5,13 @@ import { Link } from 'react-router';
 import $ from 'jquery';
 import { findDomNode } from 'react-dom';
 import axios from 'axios';
-// import {mapster} from './libraries/jquery.imagemapster'; 
-//import ImageMapper from 'react-image-mapper';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import Visibility from 'material-ui/svg-icons/action/visibility';
+import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 
 class PartSymptoms extends Component {
     constructor(props) {
@@ -58,9 +63,7 @@ class PartSymptoms extends Component {
         var listSymptomsArray = []
         listSymptomsArray = this.state.symptomsArray.map((specsymp, j) => {
             return (
-                <li>
-                    <input id={specsymp.ID} type="checkbox" value={specsymp.ID} defaultChecked={false} onClick={() => { this.updatePrescence(j) }} /> {specsymp.Name}
-                </li>
+                    <Checkbox id={specsymp.ID} label={specsymp.Name} value={specsymp.ID} defaultChecked={false} onClick={() => { this.updatePrescence(j) }} /> 
             )
         })
         console.log(this.state.symptomsArray)
@@ -68,12 +71,10 @@ class PartSymptoms extends Component {
             <div className="body">
                 Please check off which of following symptoms you are experiencing:
                             <form action="/action_page.php" method="get">
-                    <ul name="bodyArea" id="areaSelect">
                         {listSymptomsArray}
-                    </ul>
                 </form>
                  <Link to={'/diagnosis'}> 
-                 <button onClick={() => { this.props.addToSymptoms(this.state.symptomsArray)}}> Next </button>
+                 <RaisedButton primary={true} onClick={() => { this.props.addToSymptoms(this.state.symptomsArray)}}> Next </RaisedButton>
                 </Link> 
             </div>
         );
