@@ -13,12 +13,13 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 class Bodyparts extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             bodyPartValue: 0
         }
         this.grabValue = this.grabValue.bind(this)
+        this.props.setStep(2)
     }
     grabValue = (event, index, value) => {
         this.setState({
@@ -29,8 +30,10 @@ class Bodyparts extends Component {
         //var bodyPartValue = 0
         console.log(this.state.bodyPartValue)
         return (
-            <div className="body">
-                Where are you experiencing pain or discomfort? <br />
+            <div className="bodyparts">
+                <div className='bodypartstitle' >
+                <h2 className='typewriter'> Where are you <br/> experiencing <br/> pain or discomfort?</h2> </div> 
+                <br /> 
                 <SelectField autoWidth={true} name="bodyArea" value={this.state.bodyPartValue} onChange={this.grabValue} id="areaSelect">
                     <MenuItem value='6' primaryText='Head, Throat and Neck' />
                     <MenuItem value="15" primaryText='Chest and Back' />
@@ -38,8 +41,10 @@ class Bodyparts extends Component {
                     <MenuItem value="16" primaryText='Abdomen, Pelvis & Buttocks' />
                     <MenuItem value="10" primaryText='Legs' />
                 </SelectField>
+                <br/> 
+                <Link to={'/age'}> <RaisedButton backgroundColor= '#E53935' onClick={() => {this.props.previousStep} }> Back </RaisedButton> </Link>
                 <Link to={`/sublocation/${this.state.bodyPartValue}`}>
-                    <RaisedButton primary={true} onClick={() => { this.props.setBodyArea(this.state.bodyPartValue) }}> Next </RaisedButton>
+                    <RaisedButton backgroundColor= '#E53935' onClick={() => { this.props.setBodyArea(this.state.bodyPartValue) }}> Next </RaisedButton>
                 </Link>
             </div>
         );

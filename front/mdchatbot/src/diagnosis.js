@@ -10,6 +10,7 @@ class Diagnosis extends Component {
     this.state = {
       diag: []
     }
+    this.props.setStep(5)
     console.log(this.props.symptomIDs)
     console.log(this.props.sex)
     console.log(this.props.yearOfBirth)
@@ -33,13 +34,14 @@ class Diagnosis extends Component {
     let theDiagnosis = []
     for (let i=0; i<this.state.diag.length; i++) {
       theDiagnosis.push (
-        <div> <h2>  {this.state.diag[i].Issue.Name}</h2>  
-        <p> Chance you have it {this.state.diag[i].Issue.Accuracy} </p> 
+        <div> {this.state.diag[i].Issue.Accuracy}% correlation with 
+          <h2>  {this.state.diag[i].Issue.Name}</h2>   
         </div> 
       )
     } 
     return (
       <div className="gender">
+        Your symptoms show a: 
          {theDiagnosis}
       </div>
     );

@@ -13,6 +13,16 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Visibility from 'material-ui/svg-icons/action/visibility';
 import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 
+const styles = {
+  block: {
+    maxWidth: 250,
+    margin: 'auto', 
+  },
+  checkbox: {
+    marginBottom: 4,
+  },
+};
+
 class PartSymptoms extends Component {
     constructor(props) {
         super(props)
@@ -21,6 +31,7 @@ class PartSymptoms extends Component {
             specPart: 0,
             partIDs: ''
         }
+        this.props.setStep(4)
         // this.addToSymptoms = this.addToSymptoms.bind(this)
         this.updatePrescence = this.updatePrescence.bind(this)
         //this.grabValue = this.grabValue.bind(this)
@@ -63,18 +74,19 @@ class PartSymptoms extends Component {
         var listSymptomsArray = []
         listSymptomsArray = this.state.symptomsArray.map((specsymp, j) => {
             return (
-                    <Checkbox id={specsymp.ID} label={specsymp.Name} value={specsymp.ID} defaultChecked={false} onClick={() => { this.updatePrescence(j) }} /> 
+                    <Checkbox style={styles.checkbox} id={specsymp.ID} label={specsymp.Name} value={specsymp.ID} defaultChecked={false} onClick={() => { this.updatePrescence(j) }} /> 
             )
         })
         console.log(this.state.symptomsArray)
         return (
-            <div className="body">
-                Please check off which of following symptoms you are experiencing:
-                            <form action="/action_page.php" method="get">
+            <div className="symptoms">
+                <h2 className='typewriter'> Please check off which <br/> of following symptoms <br/> you are experiencing: </h2> <br/>
+                <div style={styles.block}>
                         {listSymptomsArray}
-                </form>
+                        </div>
+                <Link to={'/bodyparts'}> <RaisedButton backgroundColor= '#E53935' onClick={() => {this.props.previousStep} }> Back </RaisedButton> </Link>
                  <Link to={'/diagnosis'}> 
-                 <RaisedButton primary={true} onClick={() => { this.props.addToSymptoms(this.state.symptomsArray)}}> Next </RaisedButton>
+                 <RaisedButton backgroundColor= '#E53935' onClick={() => { this.props.addToSymptoms(this.state.symptomsArray)}}> Next </RaisedButton>
                 </Link> 
             </div>
         );

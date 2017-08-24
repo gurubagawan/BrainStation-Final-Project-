@@ -22,9 +22,8 @@ export default () => (
 ReactDOM.render((
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute component={Home} />
+            <IndexRoute component={Gender} />
             <Route path="age" component={Age} />
-            <Route path='gender' component={Gender} />
             <Route path='bodyparts' component= {Bodyparts}/>
             <Route path='sublocation/:id' component={Sublocation}/>
             <Route path='bodypartsymptoms/:id' component = {PartSymptoms} />

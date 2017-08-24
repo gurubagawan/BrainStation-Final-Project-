@@ -10,12 +10,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Age extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             birthYear: 0
         }
         this.grabValue = this.grabValue.bind(this)
+        this.props.setStep(1)
     }
     grabValue = (event, index, value) => {
         this.setState({
@@ -35,11 +36,15 @@ class Age extends Component {
         return (
             <div className="App">
                 <form>
-                    What year were you born? <br/> 
+                    <div className="typewriter">
+                    <h2> What year were <br/> you born?</h2>
+                    </div> 
                     <SelectField autoWidth={true} floatingLabelText='Birth year' value={this.state.birthYear} onChange={this.grabValue}>
                         {ageDropDown}
                     </SelectField>
-                    <Link to={'/bodyparts'}> <RaisedButton primary={true} onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </RaisedButton> </Link>
+                    <br/> 
+                    <Link to={'/'}> <RaisedButton backgroundColor= '#E53935'onClick={() => {this.props.previousStep} }> Back </RaisedButton> </Link>
+                    <Link to={'/bodyparts'}> <RaisedButton backgroundColor= '#E53935' onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </RaisedButton> </Link>
                 </form>
             </div>
         );

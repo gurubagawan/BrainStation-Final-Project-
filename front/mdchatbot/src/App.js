@@ -7,6 +7,7 @@ import axios from 'axios';
 import Symptoms from './symptoms'
 import { Link } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -17,6 +18,27 @@ import {
   Stepper,
   StepLabel,
 } from 'material-ui/Stepper';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    color: '#E53935',
+  },
+  appBar: {
+    height: 100,
+    color: '#E53935'
+  },
+  stepper: {
+        iconColor: '#E53935'
+    }
+});
+
+class Icon extends Component {
+  render() {
+    return (<img className='image' src='whiteIcon.png' style={{ marginTop: '-26px', border: '4px solid white' }} />
+    )
+  }
+}
+
 
 
 class App extends Component {
@@ -30,7 +52,8 @@ class App extends Component {
       symptoms: [],
       bodyArea: 0,
       specBodyPart: 0,
-      stepIndex: 0
+      stepIndex: 0,
+      open: true,
     }
     this.setBodyArea = this.setBodyArea.bind(this)
     this.setAge = this.setAge.bind(this)
@@ -38,6 +61,7 @@ class App extends Component {
     this.changeGender = this.changeGender.bind(this)
     this.addToSymptoms = this.addToSymptoms.bind(this)
     this.nextStep = this.nextStep.bind(this)
+    this.setStep = this.setStep.bind(this)
     // axios.get('http://localhost:8080/symptoms',)
     //   .then(res => {
     //     this.setState({
@@ -46,11 +70,11 @@ class App extends Component {
     //     console.log('get request was made ')
     //   })
   }
+
   setBodyArea(num) {
     this.setState({
       bodyArea: num
     });
-    this.nextStep()
   }
   nextStep() {
     if (this.state.stepIndex < 7) {
@@ -66,12 +90,16 @@ class App extends Component {
       })
     }
   }
+  setStep(num) {
+    this.setState ({
+        stepIndex: num, 
+    })
+  }
 
   setSpecBodyPart(num) {
     this.setState({
       specBodyPart: num,
     })
-    this.nextStep()
   }
   getSymptoms(event) {
     event.preventDefault(); //stops page reload 
@@ -93,18 +121,12 @@ class App extends Component {
     this.setState({
       yearOfBirth: number
     })
-    this.nextStep()
   }
   addToSymptoms(array) {
     let thisString = ''
     for (let i = 0; i < array.length; i++) {
       if (array[i].present) {
         thisString += (array[i].ID + ',')
-        // this.setState({
-        //   symptomIDs: this.state.symptomIDs +','+ array[i].ID
-        // })
-        // console.log('true')
-        // console.log(array[i].ID)
       }
     }
     console.log(thisString)
@@ -112,18 +134,27 @@ class App extends Component {
       symptomIDs: thisString
     })
   }
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
 
   render() {
     // console.log(this.state.specBodyPart)
     console.log(this.state.symptomIDs)
     console.log(this.props.children)
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
-          <AppBar title='Dr. Robot' />
-          <Stepper activeStep={this.state.stepIndex}>
-            <Step>
-              <StepLabel>Gender</StepLabel>
+          <AppBar titleStyle={{fontSize: '48px'}} className='red' title='Dr. Robot' iconElementLeft={<Icon />}
+          />
+          <Stepper  activeStep={this.state.stepIndex}>
+            <Step  color= '#E53935'>
+              <StepLabel muiTheme={muiTheme}>Gender</StepLabel>
             </Step>
             <Step>
               <StepLabel>Age</StepLabel>
@@ -144,6 +175,8 @@ class App extends Component {
               <StepLabel>More Info</StepLabel>
             </Step>
           </Stepper>
+          <div className='bubble'>
+            <div className ='innerbubble'>
           {/* <h3> This is some stuff to try this shit out </h3>  */}
           {React.cloneElement(this.props.children, {
             setSpecBodyPart: this.setSpecBodyPart, specBodyPart: this.state.specBodyPart,
@@ -151,8 +184,13 @@ class App extends Component {
             changeGender: this.changeGender, gender: this.state.gender, sex: this.state.sex,
             setBodyArea: this.setBodyArea, bodyArea: this.state.bodyArea,
             addToSymptoms: this.addToSymptoms, symptomIDs: this.state.symptomIDs,
-            nextStep: this.nextStep, previousStep: this.previousStep, stepIndex: this.state.stepIndex, 
+            nextStep: this.nextStep, previousStep: this.previousStep, stepIndex: this.state.stepIndex,
+            open: this.state.open, handleClose: this.handleClose, handleOpen: this.handleOpen,
+            setStep: this.setStep, 
           })}
+          <br/>
+          </div> </div>
+          <img className='robot' src="robot.png" alt=""/>
         </div>
       </MuiThemeProvider>
     );

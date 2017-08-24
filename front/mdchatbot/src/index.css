@@ -5,20 +5,69 @@ body {
 }
 .typewriter {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; 
   /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .05em; /* Adjust as needed */
   animation: 
-    typing 3.5s steps(40, end),
+    typing 3.25s steps(75, end),
     blink-caret .75s step-end infinite;
 }
 
 .test {
   display: inline-block; 
 }
+.robot {
+  max-height: 300px
+}
+.h1 {
+  font-size: 48px; 
+}
 
+.h2{
+  display: inline-block;
+}
+
+.bubble {
+  background-image: url('./chatbot.svg'); 
+  background-size: 100% 100%; 
+  padding-top: 30px; 
+  padding-bottom: 8%;  
+  width: auto; 
+}
+.innerbubble {
+  margin-bottom: 30px; 
+}
+.red {
+  background-color: red; 
+  display: flex; 
+  align-items: center; 
+}
+.image{
+  height: 75px; 
+  width: 75px; 
+  vertical-align: middle; 
+  display: inline-block; 
+  margin-bottom: 5px; 
+  align-self: center; 
+  border-radius: 10px; 
+}
+
+.btn{
+  display: inline-block;
+  height: 185px;
+  width: 185px;
+  border-radius: 50%;
+  padding: 0px; 
+  margin: 10px; 
+}
+.symptoms {
+  margin-bottom: 30%; 
+  box-sizing: border-box; 
+}
+.btn :focus {
+  outline: 200px; 
+}
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
