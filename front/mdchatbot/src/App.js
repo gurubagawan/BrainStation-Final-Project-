@@ -54,6 +54,7 @@ class App extends Component {
       specBodyPart: 0,
       stepIndex: 0,
       open: true,
+      DiagnosisID: 0, 
     }
     this.setBodyArea = this.setBodyArea.bind(this)
     this.setAge = this.setAge.bind(this)
@@ -62,15 +63,14 @@ class App extends Component {
     this.addToSymptoms = this.addToSymptoms.bind(this)
     this.nextStep = this.nextStep.bind(this)
     this.setStep = this.setStep.bind(this)
-    // axios.get('http://localhost:8080/symptoms',)
-    //   .then(res => {
-    //     this.setState({
-    //       symptoms: res.data,
-    //     })
-    //     console.log('get request was made ')
-    //   })
+    this.setDiagnosis = this.setDiagnosis.bind(this)
   }
 
+  setDiagnosis (num) {
+    this.setState ({
+      DiagnosisID: num, 
+    })
+  }
   setBodyArea(num) {
     this.setState({
       bodyArea: num
@@ -186,11 +186,11 @@ class App extends Component {
             addToSymptoms: this.addToSymptoms, symptomIDs: this.state.symptomIDs,
             nextStep: this.nextStep, previousStep: this.previousStep, stepIndex: this.state.stepIndex,
             open: this.state.open, handleClose: this.handleClose, handleOpen: this.handleOpen,
-            setStep: this.setStep, 
+            setStep: this.setStep, setDiagnosis: this.setDiagnosis, DiagnosisID: this.state.DiagnosisID, 
           })}
           <br/>
           </div> </div>
-          <img className='robot' src="robot.png" alt=""/>
+          <img className='robot' src="eveQuotes.png" alt=""/>
         </div>
       </MuiThemeProvider>
     );

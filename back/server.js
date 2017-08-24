@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-var apiKey1 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imd1cnUuYmFnYXdhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjIwMzEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiIyMDAiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL2xpbWl0IjoiOTk5OTk5OTk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9tZW1iZXJzaGlwIjoiUHJlbWl1bSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGFuZ3VhZ2UiOiJlbi1nYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjIwOTktMTItMzEiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXBzdGFydCI6IjIwMTctMDgtMTQiLCJpc3MiOiJodHRwczovL3NhbmRib3gtYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTUwMzU5MTIzOSwibmJmIjoxNTAzNTg0MDM5fQ.4omwd8DDDCxYp7BAXS0VWslYvO07JkakDZwj5J3AoCg'
+var apiKey1 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imd1cnUuYmFnYXdhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjIwMzEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiIyMDAiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL2xpbWl0IjoiOTk5OTk5OTk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9tZW1iZXJzaGlwIjoiUHJlbWl1bSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGFuZ3VhZ2UiOiJlbi1nYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjIwOTktMTItMzEiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXBzdGFydCI6IjIwMTctMDgtMTQiLCJpc3MiOiJodHRwczovL3NhbmRib3gtYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTUwMzYwMTEwNiwibmJmIjoxNTAzNTkzOTA2fQ.l27Q_z9kp0670HVJfep4pfGdjGSIbwfV-E4IcmlFw9g'
 
 const urlsymptoms = `https://sandbox-healthservice.priaid.ch/symptoms?token=${apiKey1}&language=en-gb&format=json`
 
@@ -56,7 +56,6 @@ app.get('/bodyarea/:id', function (req, res) {
     var bodyParts = []
     //console.log(req.body.text)
     let bodyRegion = req.params.id
-    console.log(bodyRegion)
     //console.log(subLocation)
     let bodyURL = `https://sandbox-healthservice.priaid.ch/body/locations/${bodyRegion}?token=${apiKey1}&language=en-gb&format=json`
     axios.get(bodyURL)
@@ -78,9 +77,6 @@ app.get('/bodypart/:specbodypart/:gender', function (req, res) {
     //console.log(req.body.text)
     let partID = req.params.specbodypart
     let gender = req.params.gender
-    console.log(partID)
-    console.log(gender)
-    console.log(req.params)
     let bodyURL = `https://sandbox-healthservice.priaid.ch/symptoms/${partID}/${gender}?token=${apiKey1}&language=en-gb&format=json`
     axios.get(bodyURL)
         .then(function (response) {
@@ -99,9 +95,6 @@ app.get('/diagnosis/:gender/:birthYear/:IDS', function (req, res) {
     let symptoms = req.params.IDS
     let gender = req.params.gender
     let yearOfBirth = req.params.birthYear
-    console.log(symptoms)
-    console.log(gender)
-    console.log(yearOfBirth)
     let bodyURL = `https://sandbox-healthservice.priaid.ch/diagnosis?token=${apiKey1}&symptoms=[${symptoms}]&year_of_birth=${yearOfBirth}&language=en-gb&gender=${gender}&format=json`
     //`https://sandbox-healthservice.priaid.ch/diagnosi${partID}/${gender}?token=${apiKey1}&language=en-gb&format=json`
     axios.get(bodyURL)
@@ -110,6 +103,28 @@ app.get('/diagnosis/:gender/:birthYear/:IDS', function (req, res) {
             //console.log('get request was made')
             console.log(partSymptoms)
             res.send(partSymptoms)
+        })
+        .catch(function (error) {
+            console.log('Error! in diagnosis get' + error)
+        })
+    //res.send(bodySymptoms)
+})
+
+app.get('/moreInfo/:gender/:birthYear/:ID', function (req, res) {
+    let disease = req.params.ID
+    let gender = req.params.gender
+    let yearOfBirth = req.params.birthYear
+    console.log(disease)
+    console.log(gender)
+    console.log(yearOfBirth)
+    let bodyURL = `https://sandbox-healthservice.priaid.ch/issues/${disease}/info?token=${apiKey1}&year_of_birth=${yearOfBirth}&language=en-gb&gender=${gender}&format=json`
+    //`https://sandbox-healthservice.priaid.ch/diagnosi${partID}/${gender}?token=${apiKey1}&language=en-gb&format=json`
+    axios.get(bodyURL)
+        .then(function (response) {
+            disInfo = (response.data);
+            //console.log('get request was made')
+            console.log(disInfo)
+            res.send(disInfo)
         })
         .catch(function (error) {
             console.log('Error! in diagnosis get' + error)

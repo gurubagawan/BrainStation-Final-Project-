@@ -12,6 +12,7 @@ import PartSymptoms from './partsymptoms';
 import Diagnosis from './diagnosis'
 import {Button, Icon} from 'react-materialize'
 import Home from './home'
+import Info from './moreinfo'
 export default () => (
 	<Button waves='light'>
 		<Icon>thumb_up</Icon>
@@ -28,6 +29,7 @@ ReactDOM.render((
             <Route path='sublocation/:id' component={Sublocation}/>
             <Route path='bodypartsymptoms/:id' component = {PartSymptoms} />
             <Route path= 'diagnosis'component= {Diagnosis}/>
+            <Route path= 'moreInfo/:id' component={Info}/>
         </Route>
     </Router>
 ), document.getElementById('root'));
