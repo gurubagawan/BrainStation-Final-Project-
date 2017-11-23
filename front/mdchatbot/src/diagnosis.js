@@ -11,6 +11,7 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Visibility from 'material-ui/svg-icons/action/visibility';
 import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 class Diagnosis extends Component {
@@ -43,27 +44,34 @@ class Diagnosis extends Component {
     let theDiagnosis = []
     for (let i = 0; i < this.state.diag.length; i++) {
       theDiagnosis.push(
-        <div> 
+        <div>
           <h2>  {this.state.diag[i].Issue.Name}</h2>
           <div className="meter">
-            <LinearProgress style={{height: '10px', width: '75%', 
-            borderRadius: '10px', margin:'auto', 
-            marginBottom: '10px'
-            }} 
-            color='#E53935' mode="determinate" value={this.state.diag[i].Issue.Accuracy} />
-          </div> 
+            <LinearProgress style={{
+              height: '10px', width: '75%',
+              borderRadius: '10px', margin: 'auto',
+              marginBottom: '10px'
+            }}
+              color='#E53935' mode="determinate" value={this.state.diag[i].Issue.Accuracy} />
+          </div>
           <Link to={`/moreInfo/${this.state.diag[i].Issue.ID}`}>
-          <RaisedButton style={{marginBottom: '20px'}} backgroundColor='#E53935' onClick={() => { this.props.setDiagnosis(this.state.diag[i].Issue.ID) }} > More Info </RaisedButton>
-        </Link> 
-        <br/>
+            <RaisedButton style={{ marginBottom: '20px' }} backgroundColor='#E53935' onClick={() => { this.props.setDiagnosis(this.state.diag[i].Issue.ID) }} > More Info </RaisedButton>
+          </Link>
+          <br />
         </div>
       )
     }
+    let toDisplay = (this.state.diag.length > 0 ?
+      <div>
+        <h2> These issues have been associated with your symptoms. </h2>
+        <p> If you would like any more info on any of these, please click more info </p>
+        {theDiagnosis} </div>
+      :
+      <div> <h2> There doesn't seem to be any diseases associated with your symptoms :( </h2> <br /> Please talk to a doctor for more help! </div>
+    )
     return (
       <div className="gender">
-        <h3> These issues have been associated with your symptoms. </h3>
-        <p> If you would like any more info on any of these, please click more info </p>
-        {theDiagnosis}
+        {toDisplay}
       </div>
     );
   }

@@ -34,7 +34,7 @@ const muiTheme = getMuiTheme({
 
 class Icon extends Component {
   render() {
-    return (<img className='image' src='whiteIcon.png' style={{ marginTop: '-26px', border: '4px solid white' }} />
+    return (<Link to={'/'}> <img className='image' src='whiteIcon.png' style={{ marginTop: '-26px', border: '4px solid white' }} /> </Link> 
     )
   }
 }

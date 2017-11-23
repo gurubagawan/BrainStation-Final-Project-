@@ -51,17 +51,18 @@ class Sublocation extends Component {
       )
     })
     let loadingPartsJSX = (this.state.subArea.length > 0 ?
-      <div> <h2 className='typewriter'>  Okay which part <br/> specifically? </h2> 
+      <div> <h2 className='typewriter'>  Okay which part <br /> specifically? </h2>
         <SelectField name="subArea" onChange={this.grabValue} id="areaSelect" value={this.state.specPart}>
           {subAreaArray}
         </SelectField> <br />
-        <Link to={'/age'}> <RaisedButton backgroundColor='#E53935' onClick={() => { this.props.previousStep }}> Back </RaisedButton> </Link>
-        <Link to={`/bodypartsymptoms/${this.state.specPart}`} ><RaisedButton backgroundColor='#E53935' onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </RaisedButton> </Link> </div>
+      </div>
       : <div> <CircularProgress size={80} thickness={5} /></div>)
     // console.log(subAreaArray)
     return (
       <div>
         {loadingPartsJSX}
+        <Link to={'/age'}> <RaisedButton backgroundColor='#E53935' onClick={() => { this.props.previousStep }}> Back </RaisedButton> </Link>
+        <Link to={`/bodypartsymptoms/${this.state.specPart}`} ><RaisedButton backgroundColor='#E53935' onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </RaisedButton> </Link>
       </div>
     )
   }
