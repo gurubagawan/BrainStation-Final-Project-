@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
-import {Button, Icon} from 'react-materialize'
-import DropDownMenu from 'material-ui/DropDownMenu';
+// import {Button, Icon} from 'react-materialize'
+// import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -30,7 +29,7 @@ class Age extends Component {
         }
         var ageDropDown = ageArray.map((curAge, j) => {
             return (
-                <MenuItem key={j} value={curAge} primaryText={curAge}/> 
+                <MenuItem key={j} value={curAge} primaryText={curAge}/>
             )
         })
         return (
@@ -38,11 +37,11 @@ class Age extends Component {
                 <form>
                     <div className="typewriter">
                     <h2> What year were <br/> you born?</h2>
-                    </div> 
+                    </div>
                     <SelectField autoWidth={true} floatingLabelText='Birth year' value={this.state.birthYear} onChange={this.grabValue}>
                         {ageDropDown}
                     </SelectField>
-                    <br/> 
+                    <br/>
                     <Link to={'/'}> <RaisedButton backgroundColor= '#E53935'onClick={() => {this.props.previousStep} }> Back </RaisedButton> </Link>
                     <Link to={'/bodyparts'}> <RaisedButton backgroundColor= '#E53935' onClick={() => {this.props.setAge(this.state.birthYear)} }> Next </RaisedButton> </Link>
                 </form>

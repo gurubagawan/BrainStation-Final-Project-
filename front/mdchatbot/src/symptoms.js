@@ -9,21 +9,21 @@ class Symptoms extends Component {
         console.log(typeof(allSymptoms))
         const symptomList = allSymptoms.map((onesymptom, i) => {
             return ( <li key={i} className="list-group-item">
-                     <input type="checkbox"  value="on" /> 
+                     <input type="checkbox"  value="on" />
                     <label>
                         {onesymptom.Name}
                     </label>
                 </li>)
-            
+
         })
         console.log(allSymptoms)
         return (
              <div>
-              {symptomList}  
+              {symptomList}
             </div>
         )
 
     }
 }
 
-export default Symptoms; 
+export default Symptoms;

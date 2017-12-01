@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import Gender from './gender';
 import Age from './age';
-import Bodyparts from './bodyparts'; 
-import Sublocation from './sublocations'; 
-import PartSymptoms from './partsymptoms'; 
+import Bodyparts from './bodyparts';
+import Sublocation from './sublocations';
+import PartSymptoms from './partsymptoms';
 import Diagnosis from './diagnosis'
 import {Button, Icon} from 'react-materialize'
-import Home from './home'
 import Info from './moreinfo'
 export default () => (
 	<Button waves='light'>
@@ -33,4 +31,3 @@ ReactDOM.render((
         </Route>
     </Router>
 ), document.getElementById('root'));
-//registerServiceWorker();

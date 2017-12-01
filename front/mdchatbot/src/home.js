@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
-import $ from 'jquery';
-import { findDomNode } from 'react-dom';
 import Gender from './gender';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-// import {mapster} from './libraries/jquery.imagemapster'; 
-//import ImageMapper from 'react-image-mapper';
 
 export default class Home extends Component {
     state = {
@@ -73,4 +67,4 @@ class man extends Component {
     }
 }
 
-//export default Home; 
+//export default Home;

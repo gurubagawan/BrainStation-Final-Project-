@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
 import axios from 'axios';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import Checkbox from 'material-ui/Checkbox';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import Visibility from 'material-ui/svg-icons/action/visibility';
-import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import LinearProgress from 'material-ui/LinearProgress';
-import CircularProgress from 'material-ui/CircularProgress';
-
 
 class Diagnosis extends Component {
   constructor(props) {
@@ -21,12 +12,10 @@ class Diagnosis extends Component {
       diag: []
     }
     this.props.setStep(5)
-    console.log(this.props.symptomIDs)
-    console.log(this.props.sex)
-    console.log(this.props.yearOfBirth)
-    ///diagnosis/:gender/:birthYear/:IDS'
+    // console.log(this.props.symptomIDs)
+    // console.log(this.props.sex)
+    // console.log(this.props.yearOfBirth)
     axios.get(`http://localhost:8080/diagnosis/${this.props.sex}/${this.props.yearOfBirth}/${this.props.symptomIDs}`, {
-      //text: this.props.bodyArea
     })
       .then(res => {
         console.log('postrequest was made and received')
@@ -39,7 +28,7 @@ class Diagnosis extends Component {
       .catch(function (error) {
         console.log('Error! in diagnosis' + error)
       })
-  }
+  };
   render() {
     let theDiagnosis = []
     for (let i = 0; i < this.state.diag.length; i++) {
@@ -60,7 +49,7 @@ class Diagnosis extends Component {
           <br />
         </div>
       )
-    }
+    };
     let toDisplay = (this.state.diag.length > 0 ?
       <div>
         <h2> These issues have been associated with your symptoms. </h2>
@@ -76,4 +65,4 @@ class Diagnosis extends Component {
     );
   }
 }
-export default Diagnosis; 
+export default Diagnosis;

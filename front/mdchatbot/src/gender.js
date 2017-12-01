@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import Home from './home'; 
+import Home from './home';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { lightBlue900 } from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -30,7 +28,7 @@ class Gender extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
       <div className="gender">
-        <Home open={this.props.open} handleClose ={this.props.handleClose} handleOpen={this.props.handleOpen}/> 
+        <Home open={this.props.open} handleClose ={this.props.handleClose} handleOpen={this.props.handleOpen}/>
         <div >
           <h3 className ='genderHead'> Please select your gender </h3>
         </div>
@@ -39,9 +37,9 @@ class Gender extends Component {
        <br/>  <Link to={'/age'}> <RaisedButton  backgroundColor= '#D50000'
        muiTheme={muiTheme}
         > Next </RaisedButton> </Link>
-      
+
       </div>
-       </MuiThemeProvider> 
+       </MuiThemeProvider>
     );
   }
 }

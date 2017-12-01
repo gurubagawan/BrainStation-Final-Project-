@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Gender from './gender';
 import Age from './age'
 import axios from 'axios';
 import Symptoms from './symptoms';
 import { Link } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -23,11 +21,9 @@ class Sublocation extends Component {
     this.props.setStep(3)
     //console.log(this.props.bodyArea)
     axios.get(`http://localhost:8080/bodyarea/${this.props.bodyArea}`, {
-      //text: this.props.bodyArea
     })
       .then(res => {
         console.log('postrequest was made and received')
-        console.log(res.data)
         this.setState({
           subArea: res.data
         })
@@ -40,8 +36,8 @@ class Sublocation extends Component {
     })
   }
   render() {
-    console.log(this.props.bodyArea)
-    console.log(this.state.specPart)
+    // console.log(this.props.bodyArea)
+    // console.log(this.state.specPart)
     var subAreaArray = []
 
     subAreaArray = this.state.subArea.map((specpart, j) => {
@@ -61,11 +57,11 @@ class Sublocation extends Component {
     return (
       <div>
         {loadingPartsJSX}
-        <Link to={'/age'}> <RaisedButton backgroundColor='#E53935' onClick={() => { this.props.previousStep }}> Back </RaisedButton> </Link>
-        <Link to={`/bodypartsymptoms/${this.state.specPart}`} ><RaisedButton backgroundColor='#E53935' onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </RaisedButton> </Link>
+        <Link to={'/bodyparts'}> <RaisedButton backgroundColor='#E53935' onClick={() => { this.props.previousStep }}> Back </RaisedButton> </Link>
+        <Link to={`/bodypartsymptoms/${this.state.specPart}`}> <RaisedButton backgroundColor='#E53935' onClick={() => { this.props.setSpecBodyPart(this.state.specPart) }}> Next </RaisedButton> </Link>
       </div>
     )
   }
 }
 
-export default Sublocation; 
+export default Sublocation;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Gender from './gender';
 import Age from './age'
@@ -34,7 +33,7 @@ const muiTheme = getMuiTheme({
 
 class Icon extends Component {
   render() {
-    return (<Link to={'/'}> <img className='image' src='whiteIcon.png' style={{ marginTop: '-26px', border: '4px solid white' }} /> </Link> 
+    return (<Link to={'/'}> <img className='image' src='whiteIcon.png' alt='Dr.Robot'style={{ marginTop: '-26px', border: '4px solid white' }} /> </Link>
     )
   }
 }
@@ -54,7 +53,7 @@ class App extends Component {
       specBodyPart: 0,
       stepIndex: 0,
       open: true,
-      DiagnosisID: 0, 
+      DiagnosisID: 0,
     }
     this.setBodyArea = this.setBodyArea.bind(this)
     this.setAge = this.setAge.bind(this)
@@ -68,14 +67,16 @@ class App extends Component {
 
   setDiagnosis (num) {
     this.setState ({
-      DiagnosisID: num, 
+      DiagnosisID: num,
     })
   }
+
   setBodyArea(num) {
     this.setState({
       bodyArea: num
     });
   }
+
   nextStep() {
     if (this.state.stepIndex < 7) {
       this.setState({
@@ -83,6 +84,7 @@ class App extends Component {
       })
     }
   }
+
   previousStep() {
     if (this.state.stepIndex > 0) {
       this.setState({
@@ -90,9 +92,10 @@ class App extends Component {
       })
     }
   }
+
   setStep(num) {
     this.setState ({
-        stepIndex: num, 
+        stepIndex: num,
     })
   }
 
@@ -101,8 +104,9 @@ class App extends Component {
       specBodyPart: num,
     })
   }
+
   getSymptoms(event) {
-    event.preventDefault(); //stops page reload 
+    event.preventDefault(); //stops page reload
     axios.post('https://localhost:8080/symptoms', {
       text: this.state.symptoms
     })
@@ -112,16 +116,19 @@ class App extends Component {
         })
       })
   }
+
   changeGender(inputedGender, inputedSex) {
     this.setState({
       gender: inputedGender, sex: inputedSex,
     })
   }
+
   setAge(number) {
     this.setState({
       yearOfBirth: number
     })
   }
+
   addToSymptoms(array) {
     let thisString = ''
     for (let i = 0; i < array.length; i++) {
@@ -129,11 +136,12 @@ class App extends Component {
         thisString += (array[i].ID + ',')
       }
     }
-    console.log(thisString)
+
     this.setState({
       symptomIDs: thisString
     })
   }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -177,7 +185,6 @@ class App extends Component {
           </Stepper>
           <div className='bubble'>
             <div className ='innerbubble'>
-          {/* <h3> This is some stuff to try this shit out </h3>  */}
           {React.cloneElement(this.props.children, {
             setSpecBodyPart: this.setSpecBodyPart, specBodyPart: this.state.specBodyPart,
             yearOfBirth: this.state.yearOfBirth, setAge: this.setAge,
@@ -186,7 +193,7 @@ class App extends Component {
             addToSymptoms: this.addToSymptoms, symptomIDs: this.state.symptomIDs,
             nextStep: this.nextStep, previousStep: this.previousStep, stepIndex: this.state.stepIndex,
             open: this.state.open, handleClose: this.handleClose, handleOpen: this.handleOpen,
-            setStep: this.setStep, setDiagnosis: this.setDiagnosis, DiagnosisID: this.state.DiagnosisID, 
+            setStep: this.setStep, setDiagnosis: this.setDiagnosis, DiagnosisID: this.state.DiagnosisID,
           })}
           <br/>
           </div> </div>
